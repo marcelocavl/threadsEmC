@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <pthread.h>
 
-
+//funcao para primeira thread
 void print_num1(void)
 {
 	int x=10;
@@ -12,6 +12,7 @@ void print_num1(void)
 	return;
 }
 
+//funcao para segunda thread
 void print_num2(void)
 {
 	int x=10;
@@ -22,10 +23,10 @@ void print_num2(void)
 	return;
 }
 
-
+//thread main
 int main() {
 
-	pthread_t thread1;   	
+	pthread_t thread1;   //primeira thread
 	pthread_t thread2;   	
 	
 	int y=10;
