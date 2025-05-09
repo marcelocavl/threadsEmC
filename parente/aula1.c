@@ -6,18 +6,6 @@ void *tarefa(void *arg)
 {
 	int i,j,sum,contInt=1;
 	char *nome=(char *)arg;
-
-int policy;
-    struct sched_param param;
-    pthread_getschedparam(pthread_self(), &policy, &param);
-
-    printf("[%s] Política: %s, Prioridade: %d\n",
-           nome,
-           (policy == SCHED_FIFO) ? "SCHED_FIFO" :
-           (policy == SCHED_RR) ? "SCHED_RR" :
-           (policy == SCHED_OTHER) ? "SCHED_OTHER" : "DESCONHECIDA",
-           param.sched_priority);
-
 	while(1){
 		sum=1;
 		for (i=0;i<100;i++){
@@ -80,7 +68,9 @@ int main() {
 
 
 
-	pthread_create(&thread1,&attr1,tarefa,(void *)nome_thread1);
+	if(pthread_create(&thread1,&attr1,tarefa,(void *)nome_thread1)){
+		printf("erro ao criar thread\n");
+	}
 	pthread_create(&thread2,&attr2,tarefa,(void *)nome_thread2);
 	pthread_create(&thread3,&attr3,tarefa,(void *)nome_thread3);
 	pthread_create(&thread4,&attr4,tarefa,(void *)nome_thread4);
